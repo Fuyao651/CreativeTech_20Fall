@@ -1,0 +1,162 @@
+<!DOCTYPE HTML>
+<!--
+	Phantom by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+
+<head>
+	<title>Week 3</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<noscript>
+		<link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+</head>
+
+<body class="is-preload">
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+		<!-- Header -->
+		<header id="header">
+			<div class="inner">
+
+				<!-- Logo -->
+				<a href="index.html" class="logo">
+					<span class="symbol"><img src="images/logo.svg" alt="" /></span><span class="title">weather data visualization & Reading</span>
+				</a>
+
+				<!-- Nav -->
+				<nav>
+					<ul>
+						<li><a href="#menu">Menu</a></li>
+					</ul>
+				</nav>
+
+			</div>
+		</header>
+
+		<!-- Menu -->
+		<nav id="menu">
+			<h2>Menu</h2>
+			<ul>
+				<li><a href="index.html">Home</a></li>
+				<!-- <li><a href="generic.html">Ipsum veroeros</a></li>
+				<li><a href="generic.html">Tempus etiam</a></li>
+				<li><a href="generic.html">Consequat dolor</a></li>
+				<li><a href="elements.html">Elements</a></li> -->
+			</ul>
+		</nav>
+
+		<!-- Main -->
+		<div id="main">
+			<div class="inner">
+				<h1>Week 3</h1>
+				<span class="image main"><img src="images/pic_week3a.jpg" height="326" alt="" /></span>
+				<h2>Mini Project</h2>
+				<h3>Basic Information</h3>
+				<span class="image main"><img src="images/pic_week3b.jpg" height="500" alt="" /></span>
+				<h4><a href="miniproject/index.html">Check here</a></h4>
+					<hr>
+				<h3>Details</h3>
+				<h4>Original Ideas</h4>
+				<p> Processing is a flexible software sketchbook and a language for learning how to code within the context of the visual arts.We all know some it can achieve the visualization effect of audio and physical movement through the sensor's serial port. It could be fun to visualize some data from internet. ( btw I really want to make a 'word cloud' to see how often does Trump say the word 'Fake News'.)</p>
+				<hr>
+				<h4>challenges encountered</h4>
+				<h5>(1)How to find the API</h5>
+				<code> http://api.openweathermap.org/data/2.5/weather?q= yourcity APPID=Your APPID</code>
+
+				<p>Google search - Free API - Ask for API key - read the documents </p>
+				<h5>(2)How to assign the data to variables in the program</h5>
+				<code>let earthquakes;</code><br>
+				<code>function preload() {</code><br>
+				<code>let url = 'https://earthquake.usgs.gov/earthquakes/feed/v1.0/' +'summary/all_day.geojson';</code><br>
+				<code>earthquakes = loadJSON(url);</code>
+				<p><a href="https://p5js.org/reference/#/p5/loadJSON">Check the tutorial</a></p>
+				<h5>(3)How to make it real-time</h5>
+				<code> SetTimeout(function, time)</code>
+				<p> <a href="https://www.youtube.com/watch?v=jKQUHGpOHqg&t=326s">Check the tutorial</a></p>
+				<h5>(4)In what language?</h5>
+				<p>Progressing / P5.js / Python  </p>
+				<hr>
+				<h4>tools and methods</h4>
+				<p>Some really useful Tutorials</p>
+				<a href="https://natureofcode.com/book/introduction/">The nature of code</a></p>
+				<a href="https://p5js.org/">Processing in P5.js</a></p>
+				<p></p>
+				<a href="https://www.youtube.com/user/shiffman">Shiffman's Youtube Channel</a></p>
+				<p></p>
+
+				<h2>3 Quotes</h2>
+				<blockquote>“Such characterizations can be misleading because the ca- pabilities and possible uses of tools are often mis- understood and the significance of the level of fin- ish is often unclear, particularly to non-designers.”</blockquote>
+				<p> This is inspiring. When we are doing prototypes, we need to focus on the specific audience and ask the most important questions that lead to a good design. Some time too obsessed with technologies and tools can be time-wasted and one may get confused or distracted. As the author says, a good prototype does not necessarily correspond to the solidity of the design.  </p>
+				<hr>
+				<blockquote>“Making separate prototypes enabled specific design questions to be addressed with as much clarity as possible. ”</blockquote>
+				<p> In this article, The prototyping methods are divided into four categories with four different purposes. There are also several techniques for each methods, such as storyboards, interactive interfaces etc. When figuring out main problems and relationships between designer and audience, the prototyping process could be more efficent.  </p>
+				<hr>
+				<blockquote>“ The pizza box was a very efficient prototype. Spend- ing virtually no time building it or considering options, the students got useful feedback on a basic design question—what physical form would be best for the user. .”</blockquote>
+				<p> This is a really straightforward cases. We prototype because we want to figure ou specific problems. Designers can use various tools and materials to achieve this goal.</p>
+				<hr>
+
+			</div>
+		</div>
+
+		<!-- Footer -->
+		<footer id="footer">
+			<div class="inner">
+				<!-- <section>
+					<h2>Get in touch</h2>
+					<form method="post" action="#">
+						<div class="fields">
+							<div class="field half">
+								<input type="text" name="name" id="name" placeholder="Name" />
+							</div>
+							<div class="field half">
+								<input type="email" name="email" id="email" placeholder="Email" />
+							</div>
+							<div class="field">
+								<textarea name="message" id="message" placeholder="Message"></textarea>
+							</div>
+						</div>
+						<ul class="actions">
+							<li><input type="submit" value="Send" class="primary" /></li>
+						</ul>
+					</form>
+				</section>
+				<section>
+					<h2>Follow</h2>
+					<ul class="icons">
+						<li><a href="#" class="icon brands style2 fa-twitter"><span class="label">Twitter</span></a>
+						</li>
+						<li><a href="#" class="icon brands style2 fa-facebook-f"><span class="label">Facebook</span></a>
+						</li>
+						<li><a href="#" class="icon brands style2 fa-instagram"><span class="label">Instagram</span></a>
+						</li>
+						<li><a href="#" class="icon brands style2 fa-dribbble"><span class="label">Dribbble</span></a>
+						</li>
+						<li><a href="#" class="icon brands style2 fa-github"><span class="label">GitHub</span></a></li>
+						<li><a href="#" class="icon brands style2 fa-500px"><span class="label">500px</span></a></li>
+						<li><a href="#" class="icon solid style2 fa-phone"><span class="label">Phone</span></a></li>
+						<li><a href="#" class="icon solid style2 fa-envelope"><span class="label">Email</span></a></li>
+					</ul>
+				</section> -->
+				<ul class="copyright">
+					<li>&copy; Fuyao Liu's Homepage. All rights reserved</li>
+				</ul>
+			</div>
+		</footer>
+
+	</div>
+
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+
+</body>
+
+</html>
