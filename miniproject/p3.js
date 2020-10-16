@@ -9,7 +9,7 @@ let maxNoise = 250;
 let noiseProg = (x) => (x);
 let weather;
 function preload(){
-   let url ='http://api.openweathermap.org/data/2.5/weather?q=Los%20angeles&APPID=c4598188bba28f4cb7d055f234a7e790';
+   let url ='http://api.openweathermap.org/data/2.5/weather?q=Los%20angeles&APPID=ItseemsIcannotshowthisparttothepublic';
    weather = loadJSON(url);
    
 }
