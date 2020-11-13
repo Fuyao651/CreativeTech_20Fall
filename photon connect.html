@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Photon connect</title>
+
+</head>
+<body>
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.0.0/lib/p5.js"></script>
+    <script>
+        let kMax;
+        let step;
+        let n = 250; // number of blobs
+        let inter = 0.05; // difference between the sizes of two blobs
+        let maxNoise = 300;
+        let noiseProg = (x) => (x*x);
+
+        let URL = "https://api.particle.io/v1/devices/2a002c000847393035313137/Light_value?access_token=abe75d9004763f6abdc969eb85c0bee65b1105c1";
+        let data = "";
+        let currentTime, prevTime;
+        let value = 10;
+
+    function setup(){
+
+        createCanvas(windowWidth, windowHeight);
+        colorMode(HSB, 1);
+	    angleMode(DEGREES);
+        noFill();
+	    //noLoop();
+	    kMax = random(0.5, 1);
+	    step = 0.02;
+    }
+
+
+    function draw(){
+        background(0.1);
+        
+        currentTime = millis() % 1000;
+        if(currentTime < prevTime)
+        {
+            data = loadJSON(URL, processData);
+           
+        }
+        //fill(255, 0, 0);
+        //circle(width/2, height/2, value);
+ 
+        prevTime = currentTime;
+
+        for (let i = 0; i < n; i++) {
+            let alpha = 1 - noiseProg(i / n);
+            let color = 0.80;
+            stroke(color, color, color, alpha);
+            let size = value + i * inter;
+            let k = kMax * sqrt(i/n);
+            let noisiness = maxNoise * noiseProg(i / n);
+            blob(size, width/2, height/2, k, i * step, noisiness);
+        }
+
+    }
+    function processData(data)
+    {
+        console.log(data.result);
+        value = map(parseInt(data.result), 0, 4096, 50, 300);
+        console.log(value);
+    }
+
+    function blob(size, xCenter, yCenter, k, t, noisiness) {
+  beginShape();
+	let angleStep = 360 / 500;
+  for (let theta = 0; theta < 360; theta += angleStep) {
+    let r1, r2;
+		/*
+    if (theta < PI / 2) {
+      r1 = cos(theta);
+      r2 = 1;
+    } else if (theta < PI) {
+      r1 = 0;
+      r2 = sin(theta);
+    } else if (theta < 3 * PI / 2) {
+      r1 = sin(theta);
+      r2 = 0;
+    } else {
+      r1 = 1;
+      r2 = cos(theta);
+    }
+		*/
+		r1 = cos(theta)+1;
+		r2 = sin(theta)+1;
+    let r = size + noise(k * r1,  k * r2, t) * noisiness;
+    let x = xCenter + r * cos(theta);
+    let y = yCenter + r * sin(theta);
+    curveVertex(x, y);
+  }
+  endShape(CLOSE);
+}
+
+    </script>
+</body>
+</html>
+
+
+
