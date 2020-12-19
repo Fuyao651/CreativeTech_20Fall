@@ -1,0 +1,199 @@
+<!DOCTYPE HTML>
+<!--
+	Phantom by HTML5 UP
+	html5up.net | @ajlkn
+	Free for personal and commercial use under the CCA 3.0 license (html5up.net/license)
+-->
+<html>
+
+<head>
+	<title> Digital Ecologies</title>
+	<meta charset="utf-8" />
+	<meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
+	<link rel="stylesheet" href="assets/css/main.css" />
+	<noscript>
+		<link rel="stylesheet" href="assets/css/noscript.css" /></noscript>
+</head>
+
+<body class="is-preload">
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+		<!-- Header -->
+		<header id="header">
+			<div class="inner">
+
+				<!-- Logo -->
+				<a href="index.html" class="logo">
+					<span class="symbol"><img src="images/logo.svg" alt="" /></span><span class="title">Creative
+						Technology Assignments</span>
+				</a>
+
+				<!-- Nav -->
+				<nav>
+					<ul>
+						<li><a href="#menu">Menu</a></li>
+					</ul>
+				</nav>
+
+			</div>
+		</header>
+
+		<!-- Menu -->
+		<nav id="menu">
+			<h2>Menu</h2>
+			<ul>
+				<li><a href="index.html">Home</a></li>
+				<!-- <li><a href="generic.html">Ipsum veroeros</a></li>
+				<li><a href="generic.html">Tempus etiam</a></li>
+				<li><a href="generic.html">Consequat dolor</a></li>
+				<li><a href="elements.html">Elements</a></li> -->
+			</ul>
+		</nav>
+
+		<!-- Main -->
+		<div id="main">
+			<div class="inner">
+				<h1>Week 9-11</h1>
+				<span class="image main"><img src="images/pic_week9a.png" alt="" /></span>
+				<h2>Concept</h2>
+				<h3><img src="images/week9_diagram.png" alt="" height = 600pt /></h3>
+				<h2>PROTOTYPE</h2>
+				<p><iframe width="560" height="315" src="https://www.youtube.com/embed/YXvX7Avxjy4" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+					<iframe width="560" height="315" src="https://www.youtube.com/embed/F-FabrIKGgs" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></p>
+				<p><a href="digitalecologies/creature.ino">check the code here</a> </p>
+				<h2>Process</h2>
+				<h3>Step1: Test the sensor</h3>
+				<h4>connect the circuit and test sensors with example code</h4>
+				<p>I used the <a href = https://wiki.dfrobot.com/Gravity:Digital_RGB_LED_Module_SKU:DFR0605>RGB LED Module</a> to control the color and indensity of light and <a href =  https://wiki.dfrobot.com/Gravity__BMI160_6-Axis_Inertial_Motion_Sensor_SKU__SEN0250>Six-axis Inertial Motion sensor </a> to detect the movement. </p>
+				<h3><img src="images/week9_RGB_test.jpg" height = 300pt alt="" /><img src="images/week9_angle_test.png" height = 300pt alt="" /> </h3>
+				<p style ="color : #8E44AD" >When I tested my motion sensor, my photon board stuck, and the cyan light didn’t breath, the Safe Mode can save this problem.</p>
+				<h3>Step2: make the lightning creature</h3>
+				<h3><img src="images/week9_making.jpg" alt="" height = 300pt /><img src="images/week9_status1_blue.jpg" alt="" height = 300pt /></h3>
+				<p>I put the sensors, the expression organs in the body of the creature,  and the breadboard, and its brain - my Photon board outside. </p>
+				<h3><img src="images/week9_creature.jpg" alt="" height = 300pt /><img src="images/week9_status2_purple.jpg" alt="" height = 300pt /></h3>
+				<h3>Step3: PROGRAM based on my idea</h3>
+				<h4>Make connection</h4>
+				<p>Response to Zhuoyu’s signal, when the heat is gone, the light intensity decreases, and finally the creature runs out of energy.</p>
+				<pre code>
+void setup() 
+{Particle.subscribe("temperature", myHandler);}		
+
+void myHandler(const char *event, const char *data) { 
+
+	int remote_brightness = atoi(data); 
+
+	// Zhuoyu's sensor from 3000-2000, map my RGB brightness from the brightest to the darkest
+	if (remote_brightness < 1750 ){
+	RGB_Strip.setBrightness(0);
+	} else if (remote_brightness > 3250 ){
+	RGB_Strip.setBrightness(255);
+	}else
+	 {remote_brightness = map ( remote_brightness, 3250, 1750, 255, 0 );
+	RGB_Strip.setBrightness(remote_brightness);}
+	}	</pre code>
+				<h4>STATUS</h4>
+				<p>The creature struggles, when it moves suddenly, the color changes.</p>
+				<pre code>
+void startShow(int n) {
+	switch(n){
+	case 0: colorWipe(RGB_Strip.Color(255, 0, 0), 50);  // Red
+			break;
+	case 1: colorWipe(RGB_Strip.Color(0, 255, 0), 50);  // Green
+			break;
+	case 2: colorWipe(RGB_Strip.Color(0, 0, 255), 50);  // Blue
+			break;
+	case 3: colorWipe(RGB_Strip.Color(RED_VAL_1, GREEN_VAL_1, BLUE_VAL_1), 50);  //Custom colour1: Yellow
+			break;
+	case 4: colorWipe(RGB_Strip.Color(RED_VAL_2, GREEN_VAL_2, BLUE_VAL_2), 50);  //Custom colour2: Purple
+			break;
+	case 5: colorWipe(RGB_Strip.Color(RED_VAL_3, GREEN_VAL_3, BLUE_VAL_3), 50);  //Custom colour3: Cyan
+			break;	  }
+	}	</pre code>
+				<h4>Publish</h4>
+				<p> Publish my event about angle of X-axis</p>
+				<pre code>
+void loop() {
+Particle.publish("Gyro_X_by_Fuyao", String::format("%.1f", GyroX)); }
+		</pre code>
+			<p style ="color : #8E44AD" >Improvement : I can publish event name instead of a sequence of number, so my partner can just identify the status decided by the event, instead of changing char(numbers) into int.</p>	
+
+			<h4>Cloud API</h4>
+			<p> get the real-time data of my creature from API</p>
+			<p> <img src="images/week9_variable.png" alt="" height = 300pt /></p>
+			<p style ="color : #8E44AD" >I really struggled with this step, there are something really important! 
+			*******Check the api url first, and use the right device name! Also, don’t forget to create the variable in the program, and use the correct grammar!!!********</p>	<pre code>
+void loop() {
+Particle.publish("Gyro_X_by_Fuyao", String::format("%.1f", GyroX)); }
+	
+void loop() {
+float GyroX = accelGyro[3] / 180.0;
+	StringGyroX =  String(GyroX)}	</pre code>
+			<p> Get the API：https://api.particle.io/v1/devices/??????/angleX?access_token= ?????? . LoadJson from another program</p>			
+		
+			<h3>Step5: Visual Idea</h3>
+			<p style ="color : #8E44AD" >When I had trouble getting me and my partner’s real-time data into the  visualization code, my partner suggest she could use the physical sounds created by her creature, and the computer audio as input. That is really a great idea. It takes time to transfer physical signal into computer data and transmit this data into another program. Why not using the physical interaction to control this other program directly?</p>	
+		
+
+
+
+			</div>
+		</div>
+
+		<!-- Footer -->
+		<footer id="footer">
+			<div class="inner">
+				<!-- <section>
+					<h2>Get in touch</h2>
+					<form method="post" action="#">
+						<div class="fields">
+							<div class="field half">
+								<input type="text" name="name" id="name" placeholder="Name" />
+							</div>
+							<div class="field half">
+								<input type="email" name="email" id="email" placeholder="Email" />
+							</div>
+							<div class="field">
+								<textarea name="message" id="message" placeholder="Message"></textarea>
+							</div>
+						</div>
+						<ul class="actions">
+							<li><input type="submit" value="Send" class="primary" /></li>
+						</ul>
+					</form>
+				</section>
+				<section>
+					<h2>Follow</h2>
+					<ul class="icons">
+						<li><a href="#" class="icon brands style2 fa-twitter"><span class="label">Twitter</span></a>
+						</li>
+						<li><a href="#" class="icon brands style2 fa-facebook-f"><span class="label">Facebook</span></a>
+						</li>
+						<li><a href="#" class="icon brands style2 fa-instagram"><span class="label">Instagram</span></a>
+						</li>
+						<li><a href="#" class="icon brands style2 fa-dribbble"><span class="label">Dribbble</span></a>
+						</li>
+						<li><a href="#" class="icon brands style2 fa-github"><span class="label">GitHub</span></a></li>
+						<li><a href="#" class="icon brands style2 fa-500px"><span class="label">500px</span></a></li>
+						<li><a href="#" class="icon solid style2 fa-phone"><span class="label">Phone</span></a></li>
+						<li><a href="#" class="icon solid style2 fa-envelope"><span class="label">Email</span></a></li>
+					</ul>
+				</section> -->
+				<ul class="copyright">
+					<li>&copy; Fuyao Liu's Homepage. All rights reserved</li>
+				</ul>
+			</div>
+		</footer>
+
+	</div>
+
+	<!-- Scripts -->
+	<script src="assets/js/jquery.min.js"></script>
+	<script src="assets/js/browser.min.js"></script>
+	<script src="assets/js/breakpoints.min.js"></script>
+	<script src="assets/js/util.js"></script>
+	<script src="assets/js/main.js"></script>
+
+</body>
+
+</html>
